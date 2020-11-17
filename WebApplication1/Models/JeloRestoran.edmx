@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TestBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Jelo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="50" />
+          <Property Name="Cijena" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="RestoranID" Type="int" />
+        </EntityType>
+        <EntityType Name="Restoran">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naziv" Type="varchar" MaxLength="50" />
+          <Property Name="Telefon" Type="varchar" MaxLength="50" />
+          <Property Name="Adresa" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_JeloDB_RestoranB">
+          <End Role="Restoran" Type="Self.Restoran" Multiplicity="0..1" />
+          <End Role="Jelo" Type="Self.Jelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restoran">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jelo">
+              <PropertyRef Name="RestoranID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TestBModelStoreContainer">
+          <EntitySet Name="Jelo" EntityType="Self.Jelo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restoran" EntityType="Self.Restoran" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_JeloDB_RestoranB" Association="Self.FK_JeloDB_RestoranB">
+            <End Role="Restoran" EntitySet="Restoran" />
+            <End Role="Jelo" EntitySet="Jelo" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TestBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Jeloes" EntityType="TestBModel.Jelo" />
+          <EntitySet Name="Restorans" EntityType="TestBModel.Restoran" />
+          <AssociationSet Name="FK_JeloDB_RestoranB1" Association="TestBModel.FK_JeloDB_RestoranB1">
+            <End Role="Restoran" EntitySet="Restorans" />
+            <End Role="Jelo" EntitySet="Jeloes" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Jelo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cijena" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="RestoranID" Type="Int32" />
+          <NavigationProperty Name="Restoran" Relationship="TestBModel.FK_JeloDB_RestoranB1" FromRole="Jelo" ToRole="Restoran" />
+        </EntityType>
+        <EntityType Name="Restoran">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naziv" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adresa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Jeloes" Relationship="TestBModel.FK_JeloDB_RestoranB1" FromRole="Restoran" ToRole="Jelo" />
+        </EntityType>
+        <Association Name="FK_JeloDB_RestoranB1">
+          <End Type="TestBModel.Restoran" Role="Restoran" Multiplicity="0..1" />
+          <End Type="TestBModel.Jelo" Role="Jelo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restoran">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Jelo">
+              <PropertyRef Name="RestoranID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestBModelStoreContainer" CdmEntityContainer="TestBEntities">
+          <EntitySetMapping Name="Jeloes">
+            <EntityTypeMapping TypeName="TestBModel.Jelo">
+              <MappingFragment StoreEntitySet="Jelo">
+                <ScalarProperty Name="RestoranID" ColumnName="RestoranID" />
+                <ScalarProperty Name="Cijena" ColumnName="Cijena" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restorans">
+            <EntityTypeMapping TypeName="TestBModel.Restoran">
+              <MappingFragment StoreEntitySet="Restoran">
+                <ScalarProperty Name="Adresa" ColumnName="Adresa" />
+                <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+                <ScalarProperty Name="Naziv" ColumnName="Naziv" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

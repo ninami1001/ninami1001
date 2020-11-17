@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3023d635a7c244f8abde13fef2dabe5c" Name="Diagram1">
+        <EntityTypeShape EntityType="TestBModel.Jelo" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="TestBModel.Restoran" Width="1.5" PointX="0.75" PointY="3.875" />
+        <AssociationConnector Association="TestBModel.FK_JeloDB_RestoranB1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

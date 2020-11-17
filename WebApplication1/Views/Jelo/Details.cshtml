@@ -1,0 +1,39 @@
+﻿@model WebApplication1.Models.Jelo
+
+
+<h2>Detalji</h2>
+
+<div>
+    <h4>Jelo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Naziv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Naziv)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Cijena)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cijena)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Restoran.Naziv)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Restoran.Naziv)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Uređivanje", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Natrag na listu", "Index")
+</p>
